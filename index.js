@@ -1,12 +1,11 @@
 const inquirer = require('inquirer')
-const userInput = require('./lib/userinput.js')
 const { Circle, Triangle, Square} = require('./lib/shapes.js')
 
 const questions = [
     {
         type:'input',
         message:'Please Enter Up To 3 Characters For Your Logo',
-        name:'characters',
+        name:'text',
     },
     {
         type:'input',
@@ -14,8 +13,9 @@ const questions = [
         name:'textColor',
     },
     {
-        type:'input',
-        message:'What Shape Would You Like: Circle, Triangle, or Square',
+        type:'list',
+        choices:['Circle', 'Triangle', 'Square'],
+        message:'What Shape Would You Like:',
         name:'shape',
     },
     {
@@ -25,11 +25,13 @@ const questions = [
     },
 ]
 
-//
 
 function init(){
     inquirer.prompt(questions)
     .then((responses) =>{
+        if(responses.text > 3 || responses.text === 0){
+            console.error('Please Enter Up To 3 Characters')
+        }else{
         let shape = ""
         switch(responses.shape)
             { 
@@ -46,11 +48,9 @@ function init(){
                 
                break
             }
-            
+        }     
     })
 
-    
 }
-
 
 init()
