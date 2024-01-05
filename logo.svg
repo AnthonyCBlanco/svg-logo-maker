@@ -1,6 +1,6 @@
 
         <svg width="200" height="200">
-            <circle cx="50" cy="50" r="50" style="fill:Red;" />
-            <text x="50" y="50" dominant-baseline="middle" text-anchor="middle" fill="Blue">SVG</text>
+            <circle cx="50" cy="50" r="50" style="fill:blue;" />
+            <text x="50" y="50" dominant-baseline="middle" text-anchor="middle" fill="red">NBA</text>
         </svg>
       
