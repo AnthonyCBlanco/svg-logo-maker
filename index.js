@@ -1,4 +1,5 @@
 const inquirer = require('inquirer')
+const fs = require('fs')
 const { Circle, Triangle, Square} = require('./lib/shapes.js')
 
 const questions = [
@@ -24,28 +25,34 @@ const questions = [
         name:'shapeColor',
     },
 ]
-
+function writeNewSVG(shape){
+    fs.writeFile('logo.svg', shape, (err) => {
+        if (err) throw err;
+        console.log('New Logo Created')
+    })
+}
 
 function init(){
     inquirer.prompt(questions)
     .then((responses) =>{
-        if(responses.text > 3 || responses.text === 0){
-            console.error('Please Enter Up To 3 Characters')
+        console.log(responses.text)
+        if(responses.text.length > 3 || responses.text.length === 0){
+            console.error('!!Please Enter Up To 3 Characters!!')
         }else{
         let shape = ""
         switch(responses.shape)
             { 
-               case "circle": 
-                shape = new Circle(responses.shapeColor)
-
+               case "Circle": 
+                shape = new Circle(responses.shapeColor, responses.text, responses.textColor)
+                    writeNewSVG(shape.create())
                break;
-               case "triangle":
-                shape = new Triangle(responses.shapeColor)
-
+               case "Triangle":
+                shape = new Triangle(responses.shapeColor, responses.text, responses.textColor)
+                    writeNewSVG(shape.create())
                break
-               case "square":
-                shape = new Square(responses.shapeColor)
-                
+               case "Square":
+                shape = new Square(responses.shapeColor, responses.text, responses.textColor)
+                    writeNewSVG(shape.create())
                break
             }
         }     
